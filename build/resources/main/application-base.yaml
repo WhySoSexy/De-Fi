@@ -1,0 +1,165 @@
+caspian:
+  taskPoolThreadSize: 10
+  path-name: pms
+  endpoint:
+    create-transaction: /rest/transactions/put
+    get-transaction: /rest/transactions/get
+    get-risk: /rest/analytics/risk/get
+    get-position: /rest/positions/get
+    get-workbook: /rest/workbooks/get
+    transaction-stream: /ws/transactions/stream
+    get-f-x-rate: /rest/analytics/fx/get
+
+management:
+  info:
+    git:
+      mode: full
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      version: ${git.build.version}
+      app: pms-feeds
+    info:
+      git:
+        mode: full
+
+recon-feeds:
+  days-of-batch: 1
+  fix-delay-string: 30
+  job-enabled: true
+  start-day: 2021-Dec-09
+  ignore-update:
+    fund: Fund OSLSG,Fund OSLDS,Fund OSLAM
+    portfolio: RFQ
+    strategy: RFQ
+
+txn-ledger-balances:
+  cron: 0 0/5 * * * *
+  job-enabled: true
+txn-ledger-ds-site-group: OSLLC_GROUP
+txn-ledger-account-classes: TRADING,FEE,FLOAT,EXCHANGE_FEE
+txn-ledger-site-groups-disabled: DBS_GROUP
+
+recon-feeds-push-retry:
+  fix-delay-string: 300000
+  job-enabled: true
+
+cep-hedge-feeds:
+  job-enabled: true
+  fix-delay-string: 60000
+  start-id: 1
+  batch-size: 30
+  valid: HEDGED,CLOSED
+  site-groups: OSLLC_GROUP,OSL_GROUP,OSLSG_GROUP,OSLAM_GROUP
+
+cep-hedge-feeds-retry:
+  job-enabled: true
+  fix-delay-string: 60000
+  batch-size: 30
+  valid: HEDGED,CLOSED
+
+platform-hedge-feeds:
+  fix-delay-string: 60000
+  site-groups: OSLLC_GROUP, OSLAM_GROUP
+  start-date: 1618891200000
+  batch-size: 30
+
+platform-rfq-trades:
+  fix-delay-string: 60000
+  site-groups: OSLLC_GROUP, OSLAM_GROUP, OSLSG_GROUP, ZODIA_GROUP
+  start-date: 2021-04-06T01:14:00+0800
+  batch-size: 30
+
+otc-booking-feeds:
+  fix-delay-string: 60000
+  start-date: 1622800800000
+  batch-size: 20
+  pre-verification: com.megaidea.domain.ops.OtcTradeBookingVerificationRequest
+  post-verification: com.megaidea.domain.ops.OtcTradeBookingRequest, com.megaidea.domain.ops.OtcDvpRequest, com.megaidea.domain.ops.OtcFopTradeRequest, com.megaidea.domain.ops.OtcFopTradeSettlementRequest
+
+ledger-balances:
+  cron: 0 * * * * *
+  fix-delay-string: 60000
+  batch-size: 50
+
+platform-coin-txn:
+  fix-delay-string: 30000
+  job-enabled: true
+  batch-size: 100
+  start-date: 1620921600000
+
+positions:
+  job-enabled: true
+  cron: 0 * * * * *
+  supported:
+    - fund: Fund OSLHK
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian: Binance Spot, BitFinex Spot, BitMex Margin, BitStamp Spot, BitTrex Spot, Deribit Margin, GDAX Spot, Huobi Spot, Kraken Spot, ItBit Spot
+    - fund: Fund OSLSG
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian:
+    - fund: Fund OSLHK
+      portfolio: Exchange
+      strategy: Exchange
+      custodian: Binance Spot, BitFinex Spot, BitMex Margin, BitStamp Spot, BitTrex Spot, Deribit Margin, GDAX Spot, Huobi Spot, Kraken Spot, ItBit Spot
+    - fund: Fund OSLSG
+      portfolio: Exchange
+      strategy: Exchange
+      custodian: Binance Spot, Bitmex Spot, BitStampSpot, GDAX Spot, Deribit Spot, ItBit Spot, Kraken Spot, OKEx Swap, OKEx Future, OKEx Wallet, ItBit Spot, GDAX 2 Spot, BitMex Spot, Gemini Spot
+    - fund: Fund OSLHK
+      portfolio: RFQ
+      strategy: RFQ
+      custodian: BitMex 2 Margin, BitStamp 2 Spot, Karken 2 Spot, GDAX 2 Spot
+    - fund: Fund OSLSG
+      portfolio: RFQ
+      strategy: RFQ
+      custodian:
+    - fund: Fund OSLHK
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian: OSLBLOCKS
+    - fund: Fund OSLHK
+      portfolio: RFQ
+      strategy: RFQ
+      custodian: OSLETHDEALER, OSLBTCDEALER, OSLUSDTDEALER
+    - fund: Fund OSLDS
+      portfolio: OTC
+      strategy: OTC
+      custodian:
+    - fund: Fund OSLDS
+      portfolio: RFQ
+      strategy: RFQ
+      custodian:
+    - fund: Fund OSLAM
+      portfolio: OTC
+      strategy: OTC
+      custodian:
+    - fund: Fund OSLAM
+      portfolio: RFQ
+      strategy: RFQ
+      custodian:
+
+spring:
+  timezone: Hongkong
+
+cep:
+  endpoint: api/v1/rfq/records
+
+platform:
+  fix-delay-string: 60000
+  start-date: 2020-10-01T00:00:00Z
+  batch-size: 20
+  otc-pre-verification: com.megaidea.domain.ops.OtcTradeBookingVerificationRequest
+  otc-post-verification: com.megaidea.domain.ops.OtcTradeBookingRequest, com.megaidea.domain.ops.OtcDvpRequest, com.megaidea.domain.ops.OtcFopTradeRequest, com.megaidea.domain.ops.OtcFopTradeSettlementRequest
+  health: version
+  hedge-endpoint: api/internal/rfq/wl/transaction
+  otc-endpoint: api/internal/getOtcApprovalState
+  ledger-balances-endpoint: api/internal/getLedgerBalances
+  rfq-trade-endpoint: api/internal/rfq/trade
+  coin-txn-endpoint: api/internal/transaction/coin
+  coin-txn-ledger-balances-endpoint: api/internal/getLedgerBalanceSummary
+

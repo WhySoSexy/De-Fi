@@ -1,0 +1,37 @@
+spring:
+  flyway:
+    locations: classpath:base/db/migration, classpath:local/db/migration
+  profiles:
+    include: base, credentials
+  jpa:
+    open-in-view: true
+
+platform-hedge-feeds:
+  job-enabled: true
+
+otc-booking-feeds:
+  job-enabled: true
+
+platform-rfq-trades:
+  job-enabled: true
+
+cep-hedge-feeds:
+  treasuryUsers: prakash.konagi+treasury_ds@osl.com, gopalsamy.vaiyapuri+uatoslam_treasury@osl.com
+
+ledger-balances:
+  job-enabled: true
+  supported:
+    currencies: BTC,ETH,BCH,XRP,LTC,USDT,TUSD,PAX,USDC,OAX,BCAP
+    other-pending-uuids: e09cf826-00eb-4164-b690-3c40e6d430e1,f3b730b7-494a-49ef-a31d-1e44d1c8bb43,62a16a76-84b6-4d03-a50a-15f50a3122dd,76f17be4-212f-40b0-a456-e6b53d152908,70e75e7b-8b44-47ce-beb5-c7f6532a5f5b,cc67ba0c-c229-4e1e-a537-a1790fce3ba6,40c66106-e464-4483-8a05-c8d271c4c8b8,69f9ec21-576f-4ce5-bc28-502902c1823a,284ccd09-a99d-47e8-a92d-c5c3304b047d,c6967d70-9874-4432-83e5-e2235e9cb48d,7ba23dc9-5708-4f21-86bf-d154e0383e0b,6a7f1ec4-bba1-46c4-b68d-28f05d5f7943,f6a91ffd-e899-4931-8c15-d21e03d5807a,18884c2d-2a0d-4fbc-8991-5278a65b8079,0aa09747-95c8-4d05-8a0a-b9b9dc098d6e,eab07d60-3d75-45d1-aaaa-5044efd22889
+    oslsgs-pending-uuids: 69f9ec21-576f-4ce5-bc28-502902c1823a,1fa5d7c5-eae9-4627-8953-94bede09d25a
+    inhouse-uuids: 284ccd09-a99d-47e8-a92d-c5c3304b047d,c6967d70-9874-4432-83e5-e2235e9cb48d,7ba23dc9-5708-4f21-86bf-d154e0383e0b,f3b730b7-494a-49ef-a31d-1e44d1c8bb43,76f17be4-212f-40b0-a456-e6b53d152908,62a16a76-84b6-4d03-a50a-15f50a3122dd,ebd8ec43-70cf-448b-8d5d-2ed79287044a,c97deab8-2f2f-4bd8-9728-a927839021c7,8e1e3da4-5223-409e-bbc3-b7c9ec280451,5009fcc1-63d8-45d8-b01c-36fd5155cef8,8083f433-0c1f-4307-a617-73483269e3a3,398935c7-e494-4fff-b4a1-477beb8650fd,3e2c886c-5197-4c5f-8ed9-6a31ad53a37c,c39565a6-9f4a-4a32-9c5d-925dd5fde7aa,e09cf826-00eb-4164-b690-3c40e6d430e1,1b209231-9909-433d-9062-f456681ecde1,d3838a9b-3a91-420a-b3da-4a6e76f92d3b,69f9ec21-576f-4ce5-bc28-502902c1823a,cc67ba0c-c229-4e1e-a537-a1790fce3ba6,70e75e7b-8b44-47ce-beb5-c7f6532a5f5b,40c66106-e464-4483-8a05-c8d271c4c8b8,066f0367-a65a-4183-9887-23de6392f491,974903e1-c6a2-4e28-b57c-525f5c554d7e,3c669e2c-1fba-40a3-a8f0-0092abacc12f,a3bebe8a-d07c-4206-8519-d8d6d6264307,27351b59-29eb-4206-be9b-3fcba366535e,03822cfd-cd33-46c2-ad20-591819a5ebac
+    treasury-uuids: 168f33c3-3988-434a-b7cf-4060c136dbee,7afe7ebc-d096-4be7-9580-2c36f118eb49,b27ae3a7-ccfb-4df8-b9d9-c70a81fa647f,8cee76ba-4efe-46d3-a9d4-780e9fb4fb42,c4bf2af8-57b3-40de-85fa-a0d096923d81
+    trader-uuids: 79d0d4d4-3fbb-453b-a7ae-23c2993b3fce,eab07d60-3d75-45d1-aaaa-5044efd22889,c6967d70-9874-4432-83e5-e2235e9cb48d,284ccd09-a99d-47e8-a92d-c5c3304b047d,03822cfd-cd33-46c2-ad20-591819a5ebac,27351b59-29eb-4206-be9b-3fcba366535e,8e237414-f773-4def-be35-55ed51e81c65,c39565a6-9f4a-4a32-9c5d-925dd5fde7aa,ebd8ec43-70cf-448b-8d5d-2ed79287044a,d3838a9b-3a91-420a-b3da-4a6e76f92d3b,1b209231-9909-433d-9062-f456681ecde1,e09cf826-00eb-4164-b690-3c40e6d430e1,7ba23dc9-5708-4f21-86bf-d154e0383e0b,0aa09747-95c8-4d05-8a0a-b9b9dc098d6e,6a7f1ec4-bba1-46c4-b68d-28f05d5f7943,f6a91ffd-e899-4931-8c15-d21e03d5807a,18884c2d-2a0d-4fbc-8991-5278a65b8079,4586c563-a106-49fb-b44f-0610faaa6987,168f33c3-3988-434a-b7cf-4060c136dbee
+    trader-pending-uuids: f3b730b7-494a-49ef-a31d-1e44d1c8bb43,62a16a76-84b6-4d03-a50a-15f50a3122dd,76f17be4-212f-40b0-a456-e6b53d152908,fe8ec640-8c82-49c2-9bc8-5ffb33cadb62,6d149c8a-cbeb-4539-90a5-d30ba77f612c
+    trade-ahead-uuids: c4bf2af8-57b3-40de-85fa-a0d096923d81,6a7f1ec4-bba1-46c4-b68d-28f05d5f7943,f6a91ffd-e899-4931-8c15-d21e03d5807a,18884c2d-2a0d-4fbc-8991-5278a65b8079
+    counterparty-uuids:
+      - source: 69f9ec21-576f-4ce5-bc28-502902c1823a
+        counterparty: 066f0367-a65a-4183-9887-23de6392f491
+    oslsgs-excluded-uuids:
+      - tradingspot: e09cf826-00eb-4164-b690-3c40e6d430e1
+        oslsgs: 69f9ec21-576f-4ce5-bc28-502902c1823a

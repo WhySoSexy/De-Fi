@@ -1,0 +1,1 @@
+ALTER table transaction rename cash_transaction;

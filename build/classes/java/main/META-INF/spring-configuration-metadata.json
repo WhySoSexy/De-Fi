@@ -1,0 +1,433 @@
+{
+  "groups": [
+    {
+      "name": "caspian",
+      "type": "group.bc.caspian.connector.config.CaspianConnectionProperties",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianConfiguration",
+      "sourceMethod": "caspianConnectionProperties()"
+    },
+    {
+      "name": "caspian.endpoint",
+      "type": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "cep",
+      "type": "bc.group.caspian.recon.config.cep.CepProperties",
+      "sourceType": "bc.group.caspian.recon.config.cep.CepProperties"
+    },
+    {
+      "name": "cep-hedge-feeds",
+      "type": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds-retry",
+      "type": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties"
+    },
+    {
+      "name": "ledger-balances",
+      "type": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties"
+    },
+    {
+      "name": "ledger-balances.supported",
+      "type": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties"
+    },
+    {
+      "name": "otc-booking-feeds",
+      "type": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties"
+    },
+    {
+      "name": "platform",
+      "type": "bc.group.caspian.recon.config.platform.PlatformProperties",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform-coin-txn",
+      "type": "bc.group.caspian.recon.service.config.PlatformCoinTransactionProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformCoinTransactionProperties"
+    },
+    {
+      "name": "platform-hedge-feeds",
+      "type": "bc.group.caspian.recon.service.config.PlatformHedgeTradeProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformHedgeTradeProperties"
+    },
+    {
+      "name": "platform-rfq-trades",
+      "type": "bc.group.caspian.recon.service.config.PlatformRfqTradeProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformRfqTradeProperties"
+    },
+    {
+      "name": "positions",
+      "type": "bc.group.caspian.recon.config.caspian.PositionsProperties",
+      "sourceType": "bc.group.caspian.recon.config.caspian.PositionsProperties"
+    },
+    {
+      "name": "txn-ledger-balances",
+      "type": "bc.group.caspian.recon.service.config.CoinTransactionLedgerBalancesProperties",
+      "sourceType": "bc.group.caspian.recon.service.config.CoinTransactionLedgerBalancesProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "caspian.api-key",
+      "type": "java.lang.String",
+      "sourceType": "group.bc.caspian.connector.config.CaspianConnectionProperties"
+    },
+    {
+      "name": "caspian.connection-url",
+      "type": "java.lang.String",
+      "sourceType": "group.bc.caspian.connector.config.CaspianConnectionProperties"
+    },
+    {
+      "name": "caspian.endpoint.create-transaction",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.endpoint.get-f-x-rate",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.endpoint.get-position",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.endpoint.get-risk",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.endpoint.get-transaction",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.endpoint.get-workbook",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.endpoint.transaction-stream",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.caspian.CaspianEndpointProperties"
+    },
+    {
+      "name": "caspian.organization",
+      "type": "java.lang.String",
+      "sourceType": "group.bc.caspian.connector.config.CaspianConnectionProperties"
+    },
+    {
+      "name": "caspian.path-name",
+      "type": "java.lang.String",
+      "sourceType": "group.bc.caspian.connector.config.CaspianConnectionProperties"
+    },
+    {
+      "name": "caspian.secret",
+      "type": "java.lang.String",
+      "sourceType": "group.bc.caspian.connector.config.CaspianConnectionProperties"
+    },
+    {
+      "name": "cep-hedge-feeds-retry.batch-size",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties"
+    },
+    {
+      "name": "cep-hedge-feeds-retry.fix-delay-string",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties"
+    },
+    {
+      "name": "cep-hedge-feeds-retry.invalid",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties"
+    },
+    {
+      "name": "cep-hedge-feeds-retry.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties"
+    },
+    {
+      "name": "cep-hedge-feeds-retry.valid",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeRetryProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.batch-size",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.fix-delay-string",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.invalid",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.site-groups",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.start-id",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.treasury-users",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep-hedge-feeds.valid",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.CepHedgeTradeProperties"
+    },
+    {
+      "name": "cep.api-key",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.cep.CepProperties"
+    },
+    {
+      "name": "cep.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.cep.CepProperties"
+    },
+    {
+      "name": "cep.host",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.cep.CepProperties"
+    },
+    {
+      "name": "cep.secret",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.cep.CepProperties"
+    },
+    {
+      "name": "ledger-balances.batch-size",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties"
+    },
+    {
+      "name": "ledger-balances.cron",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties"
+    },
+    {
+      "name": "ledger-balances.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties"
+    },
+    {
+      "name": "ledger-balances.supported.account-uuids",
+      "type": "java.util.Set<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.counterparty-uuids",
+      "type": "java.util.List<bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty$CounterpartyProperty>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.currencies",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.inhouse-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.oslsgs-excluded-uuids",
+      "type": "java.util.List<bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty$OslsgsExcludedProperty>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.oslsgs-pending-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.other-pending-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.trade-ahead-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.trader-pending-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.trader-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "ledger-balances.supported.treasury-uuids",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformLedgerBalancesProperties$SupportedProperty"
+    },
+    {
+      "name": "otc-booking-feeds.batch-size",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties"
+    },
+    {
+      "name": "otc-booking-feeds.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties"
+    },
+    {
+      "name": "otc-booking-feeds.post-verification",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties"
+    },
+    {
+      "name": "otc-booking-feeds.pre-verification",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties"
+    },
+    {
+      "name": "otc-booking-feeds.start-date",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformOtcTradeProperties"
+    },
+    {
+      "name": "platform-coin-txn.batch-size",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformCoinTransactionProperties"
+    },
+    {
+      "name": "platform-coin-txn.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformCoinTransactionProperties"
+    },
+    {
+      "name": "platform-coin-txn.start-date",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformCoinTransactionProperties"
+    },
+    {
+      "name": "platform-hedge-feeds.batch-size",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformHedgeTradeProperties"
+    },
+    {
+      "name": "platform-hedge-feeds.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformHedgeTradeProperties"
+    },
+    {
+      "name": "platform-hedge-feeds.site-groups",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformHedgeTradeProperties"
+    },
+    {
+      "name": "platform-hedge-feeds.start-date",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformHedgeTradeProperties"
+    },
+    {
+      "name": "platform-rfq-trades.batch-size",
+      "type": "java.lang.Long",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformRfqTradeProperties"
+    },
+    {
+      "name": "platform-rfq-trades.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformRfqTradeProperties"
+    },
+    {
+      "name": "platform-rfq-trades.site-groups",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformRfqTradeProperties"
+    },
+    {
+      "name": "platform-rfq-trades.start-date",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.service.config.PlatformRfqTradeProperties"
+    },
+    {
+      "name": "platform.api-key",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.coin-txn-endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.coin-txn-ledger-balances-endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.health",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.hedge-endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.host",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.ledger-balances-endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.otc-endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.rfq-trade-endpoint",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "platform.secret",
+      "type": "java.lang.String",
+      "sourceType": "bc.group.caspian.recon.config.platform.PlatformProperties"
+    },
+    {
+      "name": "positions.supported",
+      "type": "java.util.List<bc.group.caspian.recon.config.caspian.PositionsProperties$Property>",
+      "sourceType": "bc.group.caspian.recon.config.caspian.PositionsProperties"
+    },
+    {
+      "name": "txn-ledger-balances.job-enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "bc.group.caspian.recon.service.config.CoinTransactionLedgerBalancesProperties"
+    }
+  ],
+  "hints": []
+}

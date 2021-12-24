@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        if (settings.hasProperty("nexusDomain")) {
+            maven {
+                url "https://${settings.nexusDomain}/repository/bct-maven-public"
+                credentials {
+                    username settings.mavenUsername
+                    password settings.mavenPassword
+                }
+            }
+        } else {
+            gradlePluginPortal()
+        }
+    }
+}
+
+rootProject.name = 'pms-feeds'

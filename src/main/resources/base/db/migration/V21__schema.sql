@@ -1,0 +1,1 @@
+update transaction set inserted = false where acquirer in ('OSLDS','OSLAMSG') and update_datetime > '2021-09-29 04:00:00';

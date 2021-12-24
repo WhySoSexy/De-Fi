@@ -1,0 +1,173 @@
+buildscript {
+    repositories {
+        if (project.hasProperty("nexusDomain")) {
+            maven {
+                url "https://${project.nexusDomain}/repository/bct-maven-public"
+                credentials {
+                    username project.mavenUsername
+                    password project.mavenPassword
+                }
+            }
+        } else {
+            mavenCentral()
+        }
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.2.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id 'io.freefair.lombok' version '4.1.1'
+    id 'com.bmuschko.docker-remote-api' version '5.1.0'
+    id 'maven-publish'
+    id "com.gorylenko.gradle-git-properties" version "1.5.1"
+//    id 'git-commit-id-plugin'
+}
+
+group = 'group.bc.caspian'
+version = '2.7.0'
+sourceCompatibility = '1.8'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    if (project.hasProperty("nexusDomain")) {
+        maven {
+            url "https://${project.nexusDomain}/repository/bct-maven-public"
+            credentials {
+                username project.mavenUsername
+                password project.mavenPassword
+            }
+        }
+    } else {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+dependencies {
+    implementation group: 'group.bc.caspian', name: 'caspian-connector', 'version': '2.6.6'
+    implementation group: 'org.springframework', name: 'spring-web'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    implementation group: 'org.influxdb', name: 'influxdb-java', version: '2.15'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.10'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.10'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp'
+    implementation group: 'mysql', name: 'mysql-connector-java'
+    implementation group: 'com.google.guava', name: 'guava', version: '27.0-jre'
+    implementation group: 'org.flywaydb', name: 'flyway-core'
+    implementation group: 'io.micrometer', name: 'micrometer-core'
+    implementation group: 'io.micrometer', name: 'micrometer-registry-influx'
+    implementation 'joda-time:joda-time:2.10.8'
+
+    developmentOnly group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
+
+    testImplementation group: 'com.h2database', name: 'h2', version: '1.4.199'
+    testImplementation(group: 'org.springframework.boot', name: 'spring-boot-starter-test') {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.5.2'
+
+
+}
+
+publishing {
+    if (project.hasProperty('nexusDomain')) {
+        repositories {
+            maven {
+                String snapshotRepositoryUrl = "https://${project.nexusDomain}/repository/bct-maven-snapshots"
+                String releaseRepositoryUrl = "https://${project.nexusDomain}/repository/bct-maven-releases"
+                url = version.endsWith('SNAPSHOT') ? snapshotRepositoryUrl : releaseRepositoryUrl
+
+                credentials {
+                    username project.mavenUsername
+                    password project.mavenPassword
+                }
+            }
+        }
+
+        publications {
+            bootJava(MavenPublication) {
+                artifact bootJar
+            }
+        }
+    }
+}
+
+//task pullImage(type: DockerPullImage) {
+//    repository = 'influxdb'
+//    tag = '1.7'
+//}
+//
+//task createContainer(type: DockerCreateContainer) {
+//    dependsOn pullImage
+//    targetImageId { pullImage.getImageId().get() }
+//    publishAll = true
+//    autoRemove = true
+//}
+//
+//task startContainer(type: DockerStartContainer) {
+//    dependsOn createContainer
+//    targetContainerId { createContainer.getContainerId().get() }
+//}
+//
+//task startAndWaitOnHealthyContainer(type: DockerWaitHealthyContainer) {
+//    dependsOn startContainer
+//    timeout = Duration.ofSeconds(60L)
+//    targetContainerId { createContainer.getContainerId().get() }
+//}
+//
+//task inspectContainer(type: DockerInspectContainer) {
+//    dependsOn startAndWaitOnHealthyContainer
+//    targetContainerId { createContainer.getContainerId().get() }
+//    onNext({ InspectContainerResponse response ->
+//        project.ext {
+//            influxPort = response.networkSettings.ports.bindings.entrySet().first().value.first().hostPortSpec
+//        }
+//    })
+//}
+//
+//task stopContainer(type: DockerStopContainer) {
+//    targetContainerId { createContainer.getContainerId().get() }
+//}
+//
+//test {
+//    dependsOn inspectContainer
+//    finalizedBy stopContainer
+//
+//    useJUnitPlatform()
+//
+//    doFirst {
+//        String influxUrl = "http://localhost:" + project.ext.influxPort
+//        println("influxUrl = " + influxUrl)
+//        systemProperty("spring.influx.url", influxUrl)
+//    }
+//}
+
+test {
+    useJUnitPlatform()
+}
+
+task teamcity {
+    dependsOn('build')
+    doLast {
+        println("##teamcity[setParameter name='env.ARTIFACT_NAME' value='${project.name}']")
+        println("##teamcity[setParameter name='env.ARTIFACT_VERSION' value='${project.version}']")
+        println("##teamcity[setParameter name='env.ARTIFACT_FILENAME' value='${jar.archiveFileName.get()}']")
+        println("##teamcity[setParameter name='env.DOCKER_IMAGE' value='bct.caspian/${project.name}']")
+    }
+}

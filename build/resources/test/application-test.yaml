@@ -1,0 +1,130 @@
+spring:
+  influx:
+    database: caspian_feed
+    url: http://localhost:8086 #https://uatreconfeed.digitalmarkets.trade
+    user:
+    password:
+  datasource:
+    url: jdbc:h2:mem:pms_feeds;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE
+    username: username
+    password: password
+  flyway:
+    locations: classpath:test/db/migration
+  timezone: Hongkong
+  management:
+    endpoint:
+      metrics:
+        enabled: false
+    metrics:
+      export:
+        influx:
+          enabled: false
+caspian:
+  connection-url: https://
+  api-key: api-key
+  secret: api-secret
+  endpoint:
+    create-transaction: /rest/transactions/put
+    get-transaction: /rest/transactions/get
+    get-risk: /rest/analytics/risk/get
+    get-position: /rest/positions/get
+    get-workbook: /rest/workbooks/get
+    transaction-stream: /ws/transactions/stream
+    get-f-x-rate: /rest/analytics/fx/get
+  path-name: pms-demo
+recon-feeds:
+  query-parameter:
+    fund: Fund OSLHK
+    transactionType: cash,spotFx
+    property: inputTimestamp,updateTimestamp,instrument,currency,additionalData,externalCode,netAmount,rate,status,owner,orderFeedId,side
+  days-of-batch: 2
+  fix-delay-string: 30000
+  job-enabled: false
+  start-day: 2020-Jan-01
+
+recon-feeds-push-retry:
+  fix-delay-string: 300000
+  job-enabled: true
+
+server:
+  port: 8080
+
+rfq-hedge:
+  job-enabled: true
+  fix-delay-string: 60000
+  start-id: 1
+  batch-size: 29
+  status:
+    closed: CLOSED
+    valid: HEDGED
+
+platform-hedge-feeds:
+  job-enabled: true
+  fix-delay-string: 60000
+  site-groups: OSLLC_GROUP, OSLAM_GROUP
+  start-date: 1609459200000
+  batch-size: 30
+  trade-states: SETTLED, RFQ_PTS_SETTLED, RFQ_FOP_SETTLED
+
+otc-booking-feeds:
+  job-enabled: true
+  fix-delay-string: 60000
+  start-date: 1601510400000
+  batch-size: 20
+  pre-verification: com.megaidea.domain.ops.OtcTradeBookingVerificationRequest
+  post-verification: com.megaidea.domain.ops.OtcTradeBookingRequest, com.megaidea.domain.ops.OtcDvpRequest, com.megaidea.domain.ops.OtcFopTradeRequest, com.megaidea.domain.ops.OtcFopTradeSettlementRequest
+
+positions:
+  job-enabled: true
+  cron: 0 0 0,9,17 * * *
+  supported:
+    - fund: Fund OSLHK
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian: Binance Spot, BitFinex Spot, BitMex Margin, BitStamp Spot, BitTrex Spot, Deribit Margin, GDAX Spot, Huobi Spot, Kraken Spot, ItBit Spot
+    - fund: Fund OSLHK
+      portfolio: OTCFLOW
+      strategy: FX HEDGE
+      custodian: LMAX
+    - fund: Fund OSLHK
+      portfolio: RFQ
+      strategy: RFQ
+      custodian: BitMex 2 Margin, BitStamp 2 Spot, Karken 2 Spot, GDAX 2 Spot
+    - fund: Fund OSLSG
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian: BitMex 2 Margin, Deribit Margin, Deribit 2 Margin, Deribit 3 Margin, OKEx Swap, OKEx Wallet, Bitmex Margin
+    - fund: Fund OSLSG
+      portfolio: RFQ
+      strategy: RFQ
+      custodian: BitMex 3 Margin, GDAX 2 Spot
+    - fund: Fund OSLSG
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian: OSLBLOCKS
+    - fund: Fund OSLHK
+      portfolio: OTCFLOW
+      strategy: OTCFLOW
+      custodian: OSLBLOCKS
+
+ledger-balances:
+  job-enabled: true
+  cron: 0 0 0,9,17 * * *
+  batch-size: 20
+  fix-delay-string: 60000
+  supported:
+    currencies: BTC,ETH,BCH,XRP,LTC,USDT,TUSD,PAX,USDC,OAX,BCAP
+    api-pending-uuids: 97d39785-2cb9-45d5-84b5-dab8fa24b04d, df688c40-eda0-41dd-a8a7-f0a163692c06,d67e7126-53d1-4200-9bfc-5244303c9dd4,027c089b-8c9d-4a78-8a1f-bd0a991cc4e1,554cdb7f-2e44-4d40-8edb-7c768d4294d4,c9260af3-57b5-42b4-92a3-763a2cbd89ab,012060a5-69c3-4207-91c0-1e1a00d91306
+    other-pending-uuids: e09cf826-00eb-4164-b690-3c40e6d430e1,f3b730b7-494a-49ef-a31d-1e44d1c8bb43,62a16a76-84b6-4d03-a50a-15f50a3122dd,76f17be4-212f-40b0-a456-e6b53d152908,70e75e7b-8b44-47ce-beb5-c7f6532a5f5b,cc67ba0c-c229-4e1e-a537-a1790fce3ba6,40c66106-e464-4483-8a05-c8d271c4c8b8,69f9ec21-576f-4ce5-bc28-502902c1823a,284ccd09-a99d-47e8-a92d-c5c3304b047d,c6967d70-9874-4432-83e5-e2235e9cb48d,7ba23dc9-5708-4f21-86bf-d154e0383e0b,6a7f1ec4-bba1-46c4-b68d-28f05d5f7943,f6a91ffd-e899-4931-8c15-d21e03d5807a,18884c2d-2a0d-4fbc-8991-5278a65b8079,0aa09747-95c8-4d05-8a0a-b9b9dc098d6e
+    oslsgs-pending-uuids: 69f9ec21-576f-4ce5-bc28-502902c1823a
+    inhouse-uuids: 284ccd09-a99d-47e8-a92d-c5c3304b047d,c6967d70-9874-4432-83e5-e2235e9cb48d,7ba23dc9-5708-4f21-86bf-d154e0383e0b,f3b730b7-494a-49ef-a31d-1e44d1c8bb43,76f17be4-212f-40b0-a456-e6b53d152908,62a16a76-84b6-4d03-a50a-15f50a3122dd,ebd8ec43-70cf-448b-8d5d-2ed79287044a,c97deab8-2f2f-4bd8-9728-a927839021c7,8e1e3da4-5223-409e-bbc3-b7c9ec280451,5009fcc1-63d8-45d8-b01c-36fd5155cef8,8083f433-0c1f-4307-a617-73483269e3a3,398935c7-e494-4fff-b4a1-477beb8650fd,3e2c886c-5197-4c5f-8ed9-6a31ad53a37c,c39565a6-9f4a-4a32-9c5d-925dd5fde7aa,e09cf826-00eb-4164-b690-3c40e6d430e1,1b209231-9909-433d-9062-f456681ecde1,d3838a9b-3a91-420a-b3da-4a6e76f92d3b,69f9ec21-576f-4ce5-bc28-502902c1823a,cc67ba0c-c229-4e1e-a537-a1790fce3ba6,70e75e7b-8b44-47ce-beb5-c7f6532a5f5b,40c66106-e464-4483-8a05-c8d271c4c8b8,066f0367-a65a-4183-9887-23de6392f491,974903e1-c6a2-4e28-b57c-525f5c554d7e,3c669e2c-1fba-40a3-a8f0-0092abacc12f,a3bebe8a-d07c-4206-8519-d8d6d6264307,6a7f1ec4-bba1-46c4-b68d-28f05d5f7943,f6a91ffd-e899-4931-8c15-d21e03d5807a,18884c2d-2a0d-4fbc-8991-5278a65b8079,0aa09747-95c8-4d05-8a0a-b9b9dc098d6e
+    treasury-uuids: 168f33c3-3988-434a-b7cf-4060c136dbee,7afe7ebc-d096-4be7-9580-2c36f118eb49
+    counterparty-uuids:
+      - source: 69f9ec21-576f-4ce5-bc28-502902c1823a
+        counterparty: 066f0367-a65a-4183-9887-23de6392f491
+    oslsgs-excluded-uuids:
+      - tradingspot: e09cf826-00eb-4164-b690-3c40e6d430e1
+        oslsgs: 69f9ec21-576f-4ce5-bc28-502902c1823a
+txn-ledger-ds-site-group: OSLLC_GROUP
+txn-ledger-account-classes: TRADING,FEE,FLOAT,EXCHANGE_FEE
+txn-ledger-site-groups-disabled: DBS_GROUP
