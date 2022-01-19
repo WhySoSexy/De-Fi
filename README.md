@@ -1,6 +1,3 @@
-#  PMS Feeds
-
-This application is for feeding data from Caspian PMS to Recon Engine InfluxDB
 
 ## Building
 
